@@ -1,0 +1,3 @@
+node_modules/
+*.log
+# OJO: la carpeta dist/ SÍ se sube a GitHub (el servidor la usa tal cual, sin compilar)

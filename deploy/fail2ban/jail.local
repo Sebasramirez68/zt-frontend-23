@@ -1,0 +1,24 @@
+[DEFAULT]
+# No se agrega tu IP aquí a propósito: así puedes probar el bloqueo desde tu PC.
+ignoreip = 127.0.0.1/8 ::1
+banaction = iptables-multiport
+findtime = 10m
+bantime  = 10m
+
+# Ataques de fuerza bruta contra SSH
+[sshd]
+enabled  = true
+backend  = systemd
+maxretry = 3
+
+# Intentos fallidos de inicio de sesión en la aplicación (JWT)
+# Solo bloquea 80/443, así la sesión SSH sigue abierta para hacer el unban.
+[nginx-login]
+enabled  = true
+filter   = nginx-login
+port     = http,https
+logpath  = /var/log/nginx/access.log
+backend  = auto
+maxretry = 5
+findtime = 5m
+bantime  = 10m
